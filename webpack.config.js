@@ -3,9 +3,13 @@ const path = require('path')
 module.exports = {
   entry: './src/app.js',
   output: {
-    path: path.join(__dirname, 'public'),
-    filename: 'public/js/bundle.js',
+    path: path.resolve(__dirname, '/public'),
+    filename: 'bundle.js',
     publicPath: '/'
+  },
+  devServer: {
+    contentBase: 'public',
+    hot: true
   },
   module: {
     loaders: [

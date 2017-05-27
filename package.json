@@ -4,6 +4,7 @@
   "description": "Aaron Long's Casino Project written in JavaScript",
   "main": "src/app.js",
   "scripts": {
+    "start": "webpack-dev-server --inline --hot",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
