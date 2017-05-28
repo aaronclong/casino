@@ -11,6 +11,7 @@ export default class DomNode {
     }
     const node = this._makeElement(element)
     this.node = new Descriptor(node)
+    this.events = {}
   }
 
   _makeElement (string) {
@@ -21,16 +22,16 @@ export default class DomNode {
     return node
   }
 
-  addListener (event, callBack) {
-    if (typeof event === 'string') {
-      this.node.get().addEventListener(event, callBack)
-    }
+  getGuts () {
+    return this.node.get().innerHTML
   }
 
-  removeListener (event, callBack) {
-    if (typeof event === 'string') {
-      this.node.get().removeEventListener(event, callBack)
-    }
+  setGuts (text) {
+    this.node.get().innerHTML = text
+  }
+
+  appendGuts (text) {
+    this.node.get().innerHTML += text
   }
 
   /**
