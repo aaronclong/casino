@@ -1,5 +1,9 @@
 import Descriptor from './Descriptor'
 
+/**
+ * DomNode provides an access point for DOM nodes
+ * to composed in other methods/functions/classes
+ */
 export default class DomNode {
   constructor (element) {
     if (typeof element !== 'string') {
@@ -18,7 +22,15 @@ export default class DomNode {
   }
 
   addListener (event, callBack) {
-    return null
+    if (typeof event === 'string') {
+      this.node.get().addEventListener(event, callBack)
+    }
+  }
+
+  removeListener (event, callBack) {
+    if (typeof event === 'string') {
+      this.node.get().removeEventListener(event, callBack)
+    }
   }
 
   /**

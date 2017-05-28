@@ -4,7 +4,7 @@ import DomNode from '../src/DomNode'
 
 describe('DomNode Construction', () => {
   beforeAll(() => {
-    /* Creates a mock DOM that */
+    /* Creates a mock DOM for test */
     const DOM = new JSDOM(global.indexFile)
     global.window = DOM.window
   })
