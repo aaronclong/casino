@@ -1,6 +1,6 @@
 /* eslint-env jasmine */
 
-import { Descriptor } from '../src/Descriptor'
+import Descriptor from '../src/Descriptor'
 
 describe('Confirming private field', () => {
   it('Confirm getter', () => {

@@ -6,7 +6,31 @@
 	   href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.4.1/css/bulma.min.css" />
   </head>
   <body>
-	<div id="app"></div>
-	<script type="text/javascript" src="bundle.js" charset="utf-8" ></script>
+	 <div id="app">
+     <div class="hero is-primary">
+        <div class="hero-body">
+          <div clas="container">
+            <h1 clas="title">Let's Play some BlackJack</h1>
+            <h2 class="subtitle" id="subtitle">Primary subtitle</h2>
+          </div>
+        </div>
+      </div>
+     <section class="container">
+       <article class="message is-info">
+        <div class="message-header">
+          <p id="promptHeader">Dealer</p>
+        </div>
+        <div class="message-body">
+          Welcome to the Casino
+        </div>
+      </article>
+       <div class="field">
+        <p class="control">
+          <textarea id="table" class="textarea" placeholder="Press Enter to submit"></textarea>
+        </p>
+      </div>
+     </section>
+   </div>
+	 <script type="text/javascript" src="bundle.js" charset="utf-8" ></script>
   </body>
 </html>
