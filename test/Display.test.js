@@ -15,8 +15,14 @@ describe('Testing Display Modules', () => {
 
   it('Testing capturing user input', () => {
     const display = new Display()
-    display.promptUser('Prompting user')
+    display.promptUser('Prompting user').then(result => {
+      console.log(result)
+      expect(result.get()).toBe('data')
+    })
     global.window.document.getElementById('table').innerHTML = 'Data'
-    expect(display.userInput.get()).toBe('data')
+    const eventMock = new window.KeyboardEvent('keydown', { code: 'Enter', key: 'Enter' })
+    window.setTimeout(() => {
+      global.window.document.getElementById('table').dispatchEvent(eventMock)
+    }, 3000)
   })
 })

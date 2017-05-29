@@ -18,7 +18,7 @@ export default class SyntheticEvent {
   }
 
   removeListener () {
-    this.node.get().removeEventListener(this.event.get(), this._eventFire.bind(this))
+    this.node.node.get().removeEventListener(this.event.get(), this._eventFire.bind(this))
   }
 
   _eventFire (event) {
