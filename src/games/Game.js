@@ -24,4 +24,4 @@ export default class Game {
   }
  }
 
-export const turnPromise = new Promise()
+// export const turnPromise = new Promise()

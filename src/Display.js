@@ -1,5 +1,6 @@
 import DomNode from './DomNode'
 import UserInput from './UserInput'
+import SyntheticEvent from './SyntheticEvent'
 
 export default class Display {
   constructor () {
@@ -13,15 +14,22 @@ export default class Display {
     if (this.active) {
       const guts = this.textBox.getGuts()
       this.textBox.setGuts('')
-      this.textBox.node.get().disabled = true
+      // this.textBox.node.get().disabled = true
       return new UserInput(guts)
     }
     return new UserInput(null)
   }
 
-  promptUser (message) {
+  async promptUser (message) {
     this.board.setGuts(message)
     this.active = true
+    const eventFinished = event => {
+      this.active = false
+      this.textBox.node.get().disabled = true
+    }
+    const event = new SyntheticEvent(this.textBox,
+       'keydown', this.userInput, { code: 'Enter', key: 'Enter' })
+    event.subscribe(eventFinished)
     this.textBox.node.get().disabled = false
   }
 

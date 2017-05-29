@@ -15,7 +15,7 @@ describe('Testing Display Modules', () => {
 
   it('Testing capturing user input', () => {
     const display = new Display()
-    display.promptUser('Prompting user')
+    display.promptUser('Prompting user').then(e => console.log(e))
     global.window.document.getElementById('table').innerHTML = 'Data'
     expect(display.userInput.get()).toBe('data')
   })
