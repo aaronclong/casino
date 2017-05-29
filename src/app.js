@@ -1,12 +1,3 @@
-const keyenter = new window.Event('enter')
+import BlackJack from './games/BlackJack'
 
-window.document.addEventListener('keydown', e => {
-  console.log(e)
-  console.log(e['key'])
-  if ('Enter'.localeCompare(e.code) === 0) {
-    console.log('hey')
-    window.dispatchEvent(keyenter)
-  }
-})
-
-window.addEventListener('enter', e => console.log(e))
+window.document.blackJack = new BlackJack()
