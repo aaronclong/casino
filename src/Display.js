@@ -13,8 +13,7 @@ export default class Display {
   userInput () {
     if (this.active) {
       const guts = this.textBox.getGuts()
-      this.textBox.setGuts('')
-      // this.textBox.node.get().disabled = true
+      console.log(guts)
       return new UserInput(guts)
     }
     return new UserInput(null)
@@ -23,14 +22,19 @@ export default class Display {
   async promptUser (message) {
     this.board.setGuts(message)
     this.active = true
-    const eventFinished = function (event) {
-      this.active = false
-      this.textBox.node.get().disabled = true
-    }
     const event = new SyntheticEvent(this.textBox,
        'keydown', this.userInput.bind(this), { code: 'Enter', key: 'Enter' })
-    event.subscribe(eventFinished.bind(this))
+    event.subscribe(this._eventFinished(event).bind(this))
     this.textBox.node.get().disabled = false
+  }
+
+  _eventFinished (event) {
+    return function () {
+      this.active = false
+      this.textBox.setGuts('')
+      this.textBox.node.get().disabled = true
+      event.removeListener()
+    }
   }
 
   appendItem (message) {
