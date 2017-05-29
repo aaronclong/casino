@@ -15,10 +15,9 @@ describe('Testing Display Modules', () => {
 
   it('Testing capturing user input', () => {
     const display = new Display()
-    display.promptUser('Prompting user').then(e => console.log(e))
+    display.promptUser('Prompting user').then(result => expect(result).toBe('data'))
     global.window.document.getElementById('table').innerHTML = 'Data'
     const eventMock = new window.KeyboardEvent('keydown', { code: 'Enter', key: 'Enter' })
     global.window.document.getElementById('table').dispatchEvent(eventMock)
-    expect(display.userInput().get()).toBe('data')
   })
 })

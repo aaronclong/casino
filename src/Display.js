@@ -13,13 +13,13 @@ export default class Display {
   userInput () {
     if (this.active) {
       const guts = this.textBox.getGuts()
-      console.log(guts)
       return new UserInput(guts)
     }
     return new UserInput(null)
   }
 
   async promptUser (message) {
+    if (this.active) return null
     this.board.setGuts(message)
     this.active = true
     const event = new SyntheticEvent(this.textBox,
