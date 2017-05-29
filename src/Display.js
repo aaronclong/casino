@@ -10,7 +10,7 @@ export default class Display {
     this.textBox.node.get().disabled = true
   }
 
-  userInput () {
+  _getUserInput () {
     if (this.active) {
       const guts = this.textBox.getGuts()
       return new UserInput(guts)
@@ -23,7 +23,7 @@ export default class Display {
     this.board.setGuts(message)
     this.active = true
     const event = new SyntheticEvent(this.textBox,
-       'keydown', this.userInput.bind(this), { code: 'Enter', key: 'Enter' })
+       'keydown', this._getUserInput.bind(this), { code: 'Enter', key: 'Enter' })
     event.subscribe(this._eventFinished(event))
     this.textBox.node.get().disabled = false
   }
