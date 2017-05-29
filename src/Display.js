@@ -24,17 +24,18 @@ export default class Display {
     this.active = true
     const event = new SyntheticEvent(this.textBox,
        'keydown', this.userInput.bind(this), { code: 'Enter', key: 'Enter' })
-    event.subscribe(this._eventFinished(event).bind(this))
+    event.subscribe(this._eventFinished(event))
     this.textBox.node.get().disabled = false
   }
 
   _eventFinished (event) {
-    return function () {
+    const finishedCallBack = function finishedCallBack () {
       this.active = false
       this.textBox.setGuts('')
       this.textBox.node.get().disabled = true
       event.removeListener()
     }
+    return finishedCallBack.bind(this)
   }
 
   appendItem (message) {
