@@ -1,8 +1,15 @@
 import DomNode from './DomNode'
+import UserInput from './UserInput'
 
-export class Display {
+export default class Display {
   constructor () {
-    this.inputBox = new DomNode('table')
-    this.messagBoard = new DomNode('board')
+    this.board = new DomNode('board')
+    this.textBox = new DomNode('table')
+  }
+
+  get userInput () {
+    const guts = this.textBox.getGuts()
+    this.textBox.setGuts('')
+    return new UserInput(guts)
   }
 }

@@ -44,4 +44,28 @@ describe('DomNode Construction', () => {
     expect(testMacros.testTwo.get()).toBe(3)
     expect(testMacros.testThree.get()).toBe(4)
   })
+
+  it('Testing event with conditions', () => {
+    const table = new DomNode('table')
+    const event = new SyntheticEvent(table,
+           'keydown', () => table.setGuts('Conditions'),
+            { 'code': 'Enter' })
+    const eventMock = new window.KeyboardEvent('keydown', { code: 'Enter', key: 'Enter' })
+    global.window.document.getElementById('table').dispatchEvent(eventMock)
+    expect(global.window
+            .document.getElementById('table').innerHTML)
+               .toBe('Conditions')
+  })
+
+  it('Testing event without proper conditions', () => {
+    const table = new DomNode('table')
+    const event = new SyntheticEvent(table,
+           'keydown', () => table.setGuts('More Conditions'),
+            { 'code': 'Enter' })
+    const eventMock = new window.KeyboardEvent('keydown')
+    global.window.document.getElementById('table').dispatchEvent(eventMock)
+    expect(global.window
+            .document.getElementById('table').innerHTML === 'More Conditions')
+               .toBeFalsy()
+  })
 })
