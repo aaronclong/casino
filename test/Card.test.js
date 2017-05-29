@@ -11,4 +11,9 @@ describe('Testing card', () => {
     const card = new Card('DIAMOND', 'TWO')
     expect(card.toString()).toBe('| DIAMOND TWO |')
   })
+
+  it('Cet the Index of the Card value', () => {
+    const card = new Card('DIAMOND', 'KING')
+    expect(card.faceValueIndex).toBe(11)
+  })
 })

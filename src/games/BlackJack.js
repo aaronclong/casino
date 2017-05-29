@@ -8,4 +8,10 @@ export default class BlackJack extends Game {
       this.players = thePlayers
     } else throw new Error('A game needs Players')
   }
+
+  play () {
+    this.players.forEach(player => player)
+  }
+
+  takeTurn () {}
 }
