@@ -3,6 +3,7 @@ import Descriptor from './Descriptor'
 /**
  * DomNode provides an access point for DOM nodes
  * to composed in other methods/functions/classes
+ * @param {String} element
  */
 export default class DomNode {
   constructor (element) {

@@ -43,6 +43,7 @@
   "standard": {
     "parser": "babel-eslint",
     "ignore": [
+      "spec/run.js",
       "test/"
     ]
   }
