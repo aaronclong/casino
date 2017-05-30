@@ -1,4 +1,5 @@
 import Player from '../Player'
+import Dealer from '../Dealer'
 
 export default class Game {
   constructor () {
@@ -8,14 +9,24 @@ export default class Game {
     this._players = []
     this._dealer = new Player('Dealer')
     this._dealer.wallet = 10000
+    this.display = null
   }
 
-  play () {}
+  play (dealer) {
+    if (dealer instanceof Dealer) {
+      this._deck = dealer.deck
+      this.players = dealer.players
+      console.log(this._players)
+      this._display = dealer.display
+    }
+  }
 
   set players (players) {
     if (players instanceof Array) {
       // slice() is used as a copy/clone mechanism
-      this._players = Object.freeze(players.slice().push(this._dealer))
+      const playerTmp = players.slice()
+      playerTmp.push(this._dealer)
+      this._players = Object.freeze(playerTmp)
     }
   }
 

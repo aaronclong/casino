@@ -22,7 +22,7 @@ export default class Display {
 
   async promptUser (message) {
     if (this.active) return null
-    this.board.setGuts(message)
+    this.board.appendGuts('<br />' + message)
     this.active = true
     const input = this._getUserInput()
     const event = new SyntheticEvent(this.textBox,
@@ -45,5 +45,9 @@ export default class Display {
 
   appendItem (message) {
     this.board.appendGuts(message)
+  }
+
+  clearDisplay () {
+    this.board.setGuts('')
   }
 }
