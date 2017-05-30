@@ -53,7 +53,7 @@ describe('DomNode Construction', () => {
     const eventMock = new window.KeyboardEvent('keydown', { code: 'Enter', key: 'Enter' })
     global.window.document.getElementById('table').dispatchEvent(eventMock)
     expect(global.window
-            .document.getElementById('table').innerHTML)
+            .document.getElementById('table').value)
                .toBe('Conditions')
   })
 

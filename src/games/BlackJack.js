@@ -21,8 +21,11 @@ export default class BlackJack extends Game {
     if (this.turn > this.players.length) this.rounds++
     const player = this.players[this.turn]
     if (player.name !== 'dealer') {
-      this._display.appendItem('<br/>' + player.name + '\'s hand <br/>' + player.hand.toString())
-      this._display.promptUser('Would you like to hit or stay?')
+      this._display.appendItem('<br/>' + player.name +
+        '\'s hand <br/>' + player.hand.toString())
+      const result = this._display.promptUser('Would you like to hit or stay?')
+                          .then(result => console.log(result.get()))
+      console.log(result)
     }
   }
 

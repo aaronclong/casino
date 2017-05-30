@@ -10,13 +10,26 @@ export default class Display {
     this.textBox.node.get().disabled = true
   }
 
+  _defineGuts () {
+    const guts = this.textBox.getGuts()
+    return new UserInput(guts)
+  }
+
   _getUserInput () {
-    return new Promise(resolve => {
-      if (this.active) {
-        const guts = this.textBox.getGuts()
-        return new UserInput(guts)
+    return new Promise((resolve, reject) => {
+      const resolution = function resolution () {
+        if (this.active) {
+          resolve(this._defineGuts())
+        }
+        reject(new UserInput(null))
       }
-      return new UserInput(null)
+      const event = new SyntheticEvent(this.textBox,
+       'keydown', resolution.bind(this),
+        { code: 'Enter', key: 'Enter' })
+      // Triggers DOM clean up
+      event.subscribe(this._eventFinished(event))
+      // Causes the Promise to resolve
+      event.subscribe(Promise.resolve(this))
     })
   }
 
@@ -25,10 +38,6 @@ export default class Display {
     this.board.appendGuts('<br />' + message)
     this.active = true
     const input = this._getUserInput()
-    const event = new SyntheticEvent(this.textBox,
-       'keydown', () => Promise.resolve(input),
-        { code: 'Enter', key: 'Enter' })
-    event.subscribe(this._eventFinished(event))
     this.textBox.node.get().disabled = false
     return input
   }

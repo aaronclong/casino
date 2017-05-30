@@ -19,9 +19,9 @@ describe('Testing Display Modules', () => {
       console.log(result)
       expect(result.get()).toBe('data')
     })
-    global.window.document.getElementById('table').innerHTML = 'Data'
     const eventMock = new window.KeyboardEvent('keydown', { code: 'Enter', key: 'Enter' })
     window.setTimeout(() => {
+      global.window.document.getElementById('table').value = 'Data'
       global.window.document.getElementById('table').dispatchEvent(eventMock)
     }, 3000)
   })

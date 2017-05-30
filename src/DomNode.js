@@ -12,6 +12,7 @@ export default class DomNode {
     }
     const node = this._makeElement(element)
     this.node = new Descriptor(node)
+    this.tagAsString = this.node.get().tagName.toLowerCase()
     this.events = {}
   }
 
@@ -24,15 +25,27 @@ export default class DomNode {
   }
 
   getGuts () {
-    return this.node.get().innerHTML
+    if (this.tagAsString.indexOf('text') >= 0) {
+      return this.node.get().value
+    } else {
+      return this.node.get().innerHTML
+    }
   }
 
   setGuts (text) {
-    this.node.get().innerHTML = text
+    if (this.tagAsString.indexOf('text') >= 0) {
+      this.node.get().value = text
+    } else {
+      this.node.get().innerHTML = text
+    }
   }
 
   appendGuts (text) {
-    this.node.get().innerHTML += text
+    if (this.tagAsString.indexOf('text') >= 0) {
+      this.node.get().value += text
+    } else {
+      this.node.get().innerHTML += text
+    }
   }
 
   /**
