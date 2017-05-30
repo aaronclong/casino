@@ -10,6 +10,7 @@ export default class Game {
     this._dealer = new Player('Dealer')
     this._dealer.wallet = 10000
     this.display = null
+    this._deck = null
   }
 
   play (dealer) {

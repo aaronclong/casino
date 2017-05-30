@@ -1,5 +1,6 @@
 import Game from './Game'
 import BlackJackHand from './BlackJackHand'
+import UserInput from '../UserInput'
 
 export default class BlackJack extends Game {
   constructor () {
@@ -18,18 +19,40 @@ export default class BlackJack extends Game {
 
   takeTurn () {
     if (this.rounds > 5) this._determineWinner()
-    if (this.turn > this.players.length) this.rounds++
+    if (this.turn >= this.players.length) {
+      this.rounds++
+      this.turn = 0
+    }
     const player = this.players[this.turn]
-    if (player.name !== 'dealer') {
+    this.turn += 1
+    if (player.name !== 'Dealer') {
       this._display.appendItem('<br/>' + player.name +
         '\'s hand <br/>' + player.hand.toString())
       const result = this._display.promptUser('Would you like to hit or stay?')
-                          .then(result => console.log(result.get()))
+                          .then(result => this.evalResponse(result, player))
+                          .catch(e => console.log(e))
       console.log(result)
-    }
+    } else this.evalResponse(new UserInput('hit'), player)
   }
 
-  _determineWinner () {}
+  evalResponse (response, player) {
+    if (response.get() === 'hit') {
+      player._hand.pickUp(this._deck.card)
+      if (this._busted(player)) {
+        this._determineWinner()
+        return
+      }
+    }
+    this.takeTurn()
+  }
+
+  _busted (player) {
+    return player.hand.evaluateHand > 21
+  }
+
+  _determineWinner () {
+
+  }
 
   _dealHand () {
     const hand = new BlackJackHand()
