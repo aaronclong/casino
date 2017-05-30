@@ -9,7 +9,7 @@ export default class Game {
     this._players = []
     this._dealer = new Player('Dealer')
     this._dealer.wallet = 10000
-    this.display = null
+    this._display = null
     this._deck = null
   }
 
@@ -17,7 +17,6 @@ export default class Game {
     if (dealer instanceof Dealer) {
       this._deck = dealer.deck
       this.players = dealer.players
-      console.log(this._players)
       this._display = dealer.display
     }
   }
